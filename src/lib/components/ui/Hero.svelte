@@ -1,5 +1,6 @@
 <script lang="ts">
     import TactileCard from "$lib/components/ui/TactileCard.svelte";
+    import { Button } from "$lib/components/ui/button/index.js";
 </script>
 
 <div class="space-y-4">
@@ -24,12 +25,12 @@
                  I specialize in full-stack web development, but I've never stayed in one lane. I've trained custom AI models, written firmware, built mobile apps, engineered complex scraping pipelines, and automated entire workflows. This breadth allows me to architect and build complete, end-to-end systems without the friction or overhead of coordinating multiple teams
               </p>
              <div class="flex gap-4 pt-4">
-                <a href="#work" class="px-6 py-3 bg-white text-black text-sm font-medium rounded-full hover:bg-white/90 transition-colors">
+                <Button href="#work" variant="pill" class="rounded-full">
                     View Work
-                </a>
-                <a href="mailto:hello@jesper.dev" class="px-6 py-3 border border-white/20 text-white text-sm font-medium rounded-full hover:bg-white/5 transition-colors">
+                </Button>
+                <Button href="mailto:hello@jesper.dev" variant="outline" class="rounded-full border-white/20 hover:bg-white/5">
                     Contact
-                </a>
+                </Button>
              </div>
         </div>
 

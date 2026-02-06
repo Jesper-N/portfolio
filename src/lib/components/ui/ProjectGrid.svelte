@@ -1,5 +1,6 @@
 <script lang="ts">
     import TactileCard from "./TactileCard.svelte";
+    import { Button } from "$lib/components/ui/button/index.js";
 
     let {
         projects = [],
@@ -57,11 +58,13 @@
 
                 <div class="flex flex-wrap gap-2 pt-4">
                     {#each project.tags as tag (`${project.id}-${tag}`)}
-                        <span
-                            class="text-[10px] font-mono uppercase tracking-wider text-white/40"
+                        <Button
+                            variant="tag"
+                            size="tag"
+                            class="font-mono uppercase tracking-wider"
                         >
                             {tag}
-                        </span>
+                        </Button>
                     {/each}
                 </div>
             </div>

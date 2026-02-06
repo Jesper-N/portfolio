@@ -15,6 +15,8 @@
 				secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-xs",
 				ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
 				link: "text-primary underline-offset-4 hover:underline",
+				tag: "relative transition-colors duration-100 outline outline-1 outline-foreground/20 h-5.5 rounded-sm px-2 text-xs focus-visible:outline-[1.5px] focus-visible:outline-offset-2 text-foreground bg-foreground/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] hover:text-foreground hover:bg-foreground/15",
+				pill: "relative inline-flex items-center justify-center gap-2 rounded-full bg-muted text-foreground shadow-sm transition-all hover:bg-muted/80 active:translate-y-[1px] h-8 px-3.5 border border-white/10 text-xs font-medium",
 			},
 			size: {
 				default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -23,6 +25,7 @@
 				icon: "size-9",
 				"icon-sm": "size-8",
 				"icon-lg": "size-10",
+				tag: "h-5.5 px-2 text-xs",
 			},
 		},
 		defaultVariants: {
