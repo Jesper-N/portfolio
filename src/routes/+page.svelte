@@ -121,9 +121,6 @@
                 <a href="#" class="hover:text-white transition-colors"
                     >LinkedIn</a
                 >
-                <a href="#" class="hover:text-white transition-colors"
-                    >Twitter</a
-                >
             </div>
         </div>
     </footer>

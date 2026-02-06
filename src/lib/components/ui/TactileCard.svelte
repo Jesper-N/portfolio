@@ -14,7 +14,7 @@
     <a 
         {href}
         class={cn(
-            "group relative overflow-hidden rounded-xl bg-[#0a0a0a] border border-white/5 transition-all duration-500",
+            "group relative overflow-hidden rounded-xl bg-[#141414] border border-white/5 transition-all duration-500",
             interactive && "hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]",
             className
         )}
@@ -31,7 +31,7 @@
 {:else}
     <div 
         class={cn(
-            "relative overflow-hidden rounded-xl bg-[#0a0a0a] border border-white/5",
+            "relative overflow-hidden rounded-xl bg-[#141414] border border-white/5",
             className
         )}
         {style}

@@ -36,10 +36,15 @@
             </div>
 
             
-            <div class="flex items-center gap-6">
-                <div class="text-right hidden md:block">
-                    <div class="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-1">Final Grade</div>
-                    <div class="text-xs text-muted-foreground/60">Journeyman Project</div>
+            <div class="flex items-center gap-8 md:gap-10">
+                <div class="hidden md:block min-w-[12rem] text-right space-y-1.5">
+                    <div class="flex items-center justify-end gap-3">
+                        <span class="h-px w-6 bg-white/20 group-hover:bg-yellow-500/40 transition-colors duration-500"></span>
+                        <div class="text-sm font-mono text-muted-foreground uppercase tracking-widest">Final Grade</div>
+                    </div>
+                    <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/60 group-hover:text-yellow-300/70 transition-colors duration-500">
+                        Danish 7-Step Scale
+                    </div>
                 </div>
                 
                 <div class="relative flex items-center justify-center h-20 w-20 rounded-full border border-white/10 bg-white/5 group-hover:border-yellow-500/50 group-hover:bg-yellow-500/10 transition-colors duration-500">

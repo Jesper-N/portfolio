@@ -24,7 +24,7 @@
         >
             
             <div
-                class="relative h-[240px] w-full overflow-hidden rounded-lg bg-[#050505]"
+                class="relative h-[240px] w-full overflow-hidden rounded-lg bg-[#111111]"
             >
                 <img
                     src={project.image}

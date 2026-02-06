@@ -54,7 +54,7 @@
         </div>
         
         
-        <div class="absolute inset-0 z-10 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent pointer-events-none"></div>
+        <div class="absolute inset-0 z-10 bg-gradient-to-t from-[#151515] via-[#151515]/60 to-transparent pointer-events-none"></div>
 
         
         <div class="relative z-20 p-8 h-full flex flex-col justify-between pointer-events-none">
