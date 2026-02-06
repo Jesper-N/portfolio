@@ -7,8 +7,6 @@
     import MagneticCursor from "$lib/components/ui/MagneticCursor.svelte";
     import HobbiesGrid from "$lib/components/ui/HobbiesGrid.svelte";
     import Hero from "$lib/components/ui/Hero.svelte";
-
-    // Updated Projects
     let projects = [
         {
             id: "1",
@@ -56,28 +54,28 @@
 <MagneticCursor />
 <NavDock />
 
-<!-- Grain Overlay -->
+
 <div class="bg-grain"></div>
 
 <main
     class="relative z-10 min-h-screen max-w-6xl mx-auto px-6 pt-16 pb-32 space-y-32"
 >
-    <!-- Hero -->
+    
     <section>
         <Hero />
     </section>
 
-    <!-- Location & Skills -->
+    
     <section id="about">
         <InfoGrid />
     </section>
 
-    <!-- Education -->
+    
     <section>
         <Education />
     </section>
 
-    <!-- Work Grid -->
+    
     <section id="work" class="space-y-12">
         <div
             class="flex items-baseline justify-between border-b border-white/5 pb-4"
@@ -91,7 +89,7 @@
         <ProjectGrid {projects} />
     </section>
 
-    <!-- Hobbies -->
+    
     <section class="space-y-12">
         <div
             class="flex items-baseline justify-between border-b border-white/5 pb-4"
@@ -105,7 +103,7 @@
         <HobbiesGrid />
     </section>
 
-    <!-- Footer -->
+    
     <footer class="pt-24 border-t border-white/5">
         <div class="flex flex-col md:flex-row justify-between items-end gap-12">
             <div>

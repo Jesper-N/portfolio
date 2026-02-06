@@ -15,7 +15,7 @@
 			dark?: MapStyleOption;
 		};
 		theme?: "light" | "dark";
-		/** Map projection type. Use `{ type: "globe" }` for 3D globe view. */
+		
 		projection?: MapLibreGL.ProjectionSpecification;
 		center?: [number, number];
 		zoom?: number;
@@ -101,9 +101,7 @@
 
 		const styleDataHandler = () => {
 			clearStyleTimeout();
-			// Delay to ensure style is fully processed before allowing layer operations
-			// This is a workaround to avoid race conditions with the style loading
-			// else we have to force update every layer on setStyle change
+			// Wait one tick after styledata so child layers can safely add sources/layers.
 			styleTimeoutId = setTimeout(() => {
 				isStyleLoaded = true;
 				if (!initialStyleApplied) {

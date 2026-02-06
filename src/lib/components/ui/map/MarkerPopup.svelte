@@ -40,18 +40,12 @@
 	let popup: MapLibreGL.Popup | null = null;
 	let wrapperElement: HTMLDivElement | null = $state(null);
 	let shouldStayOpen = $state(false);
-
-	// Create popup when marker is ready
 	$effect(() => {
 		const marker = markerCtx.getMarker();
 		const ready = markerCtx.isReady();
 
 		if (!ready || !marker || !wrapperElement) return;
-
-		// Create popup container
 		const container = document.createElement("div");
-
-		// Build popup options
 		const popupOptions: PopupOptions = {
 			offset,
 			closeButton: false,
@@ -62,13 +56,9 @@
 		if (closeOnClick !== undefined) popupOptions.closeOnClick = closeOnClick;
 		if (closeOnMove !== undefined) popupOptions.closeOnMove = closeOnMove;
 		if (focusAfterOpen !== undefined) popupOptions.focusAfterOpen = focusAfterOpen;
-
-		// If marker is draggable, preserve popup state during movement
 		if (markerCtx.isDraggable?.()) {
 			popupOptions.closeOnMove = false;
 		}
-
-		// Create popup
 		const popupInstance = new MapLibreGL.Popup(popupOptions).setDOMContent(container);
 
 		if (maxWidth) {
@@ -76,24 +66,18 @@
 		} else {
 			popupInstance.setMaxWidth("none");
 		}
-
-		// Attach popup to marker
 		marker.setPopup(popupInstance);
 		popup = popupInstance;
-
-		// Prevent popup from closing during drag
 		$effect(() => {
 			const isDragging = markerCtx.isDragging?.();
 			if (isDragging && popupInstance.isOpen()) {
 				shouldStayOpen = true;
 			}
 		});
-
-		// Reopen popup after drag if it was open
 		$effect(() => {
 			const isDragging = markerCtx.isDragging?.();
 			if (!isDragging && shouldStayOpen && !popupInstance.isOpen()) {
-				// Small delay to ensure popup has finished closing
+				// Dragging can close the popup briefly; reopen it once drag state settles.
 				setTimeout(() => {
 					if (!popupInstance.isOpen()) {
 						marker.togglePopup();
@@ -102,14 +86,11 @@
 				}, 10);
 			}
 		});
-
-		// Move content to popup container
 		while (wrapperElement.firstChild) {
 			container.appendChild(wrapperElement.firstChild);
 		}
 
 		return () => {
-			// Move content back
 			while (container.firstChild) {
 				wrapperElement?.appendChild(container.firstChild);
 			}

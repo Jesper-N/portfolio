@@ -32,10 +32,10 @@
             Across all titles played
         </p>
 
-        <!-- Re-enable pointer events for the scroll area -->
+        
         <div class="pointer-events-auto">
             <div class="space-y-4">
-                <!-- Stat Row -->
+                
                 <div
                     class="flex items-center justify-between border-b border-white/5 pb-2"
                 >

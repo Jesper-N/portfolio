@@ -10,8 +10,6 @@
 
     let div: HTMLDivElement;
     let opacity = $state(0);
-
-    // Use spring for smooth, non-janky movement
     let coords = spring(
         { x: 0, y: 0 },
         {
@@ -19,10 +17,8 @@
             damping: 0.7,
         },
     );
-
-    // Local mouse handling (fallback)
     function handleLocalMouseMove(e: MouseEvent) {
-        if (mouseX !== null) return; // Ignore local if external is provided
+        if (mouseX !== null) return;
 
         if (!div) return;
         const rect = div.getBoundingClientRect();
@@ -37,8 +33,6 @@
         if (mouseX !== null) return;
         opacity = 0;
     }
-
-    // Effect to handle external coordinates
     $effect(() => {
         if (div && mouseX !== null && mouseY !== null) {
             const rect = div.getBoundingClientRect();

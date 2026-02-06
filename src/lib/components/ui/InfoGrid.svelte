@@ -22,9 +22,9 @@
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- Location Map -->
+    
     <TactileCard class="min-h-[300px] flex flex-col justify-between relative overflow-hidden group p-0">
-        <!-- Map Layer -->
+        
         <div class="absolute inset-0 z-0 opacity-50 transition-opacity duration-700 group-hover:opacity-100 grayscale group-hover:grayscale-0">
              <Map 
                 center={[9.40, 56.45]} 
@@ -46,10 +46,10 @@
             </Map>
         </div>
         
-        <!-- Gradient Overlay for Text Legibility -->
+        
         <div class="absolute inset-0 z-10 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent pointer-events-none"></div>
 
-        <!-- Content Overlay -->
+        
         <div class="relative z-20 p-8 h-full flex flex-col justify-between pointer-events-none">
             <div>
                 <h3 class="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-1">Base of Operations</h3>
@@ -69,7 +69,7 @@
         </div>
     </TactileCard>
 
-    <!-- Tech Stack "Terminal" -->
+    
     <TactileCard class="p-8 min-h-[300px] flex flex-col relative overflow-hidden">
         <div class="absolute inset-0 bg-black/50"></div>
         <div class="relative z-10 flex items-center justify-between mb-6 border-b border-white/10 pb-4">

@@ -3,7 +3,7 @@
 </script>
 
 <TactileCard class="w-full p-8 md:p-12 relative overflow-hidden group">
-    <!-- Background visual -->
+    
     <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1547754980-3df97fed72a8?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-luminosity group-hover:opacity-20 transition-opacity duration-700"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-transparent"></div>
 
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <!-- Telemetry Viz Placeholder -->
+        
         <div class="w-full md:w-64 space-y-3 font-mono text-xs">
             <div class="flex justify-between text-muted-foreground">
                 <span>THROTTLE</span>

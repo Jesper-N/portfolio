@@ -20,8 +20,6 @@
 	}>("marker");
 
 	let wrapperElement: HTMLDivElement | null = $state(null);
-
-	// Create tooltip popup when marker is ready
 	$effect(() => {
 		const marker = markerCtx.getMarker();
 		const markerElement = markerCtx.getElement();
@@ -29,11 +27,7 @@
 		const ready = markerCtx.isReady();
 
 		if (!ready || !marker || !markerElement || !map || !wrapperElement) return;
-
-		// Create popup container
 		const container = document.createElement("div");
-
-		// Build popup options
 		const popupOptions: PopupOptions = {
 			offset,
 			closeOnClick: true,
@@ -42,18 +36,12 @@
 		};
 
 		if (anchor !== undefined) popupOptions.anchor = anchor;
-
-		// Create popup
 		const popupInstance = new MapLibreGL.Popup(popupOptions)
 			.setMaxWidth("none")
 			.setDOMContent(container);
-
-		// Move content to popup container
 		while (wrapperElement.firstChild) {
 			container.appendChild(wrapperElement.firstChild);
 		}
-
-		// Show on hover
 		const handleMouseEnter = () => {
 			popupInstance.setLngLat(marker.getLngLat()).addTo(map);
 		};
@@ -68,8 +56,6 @@
 		return () => {
 			markerElement.removeEventListener("mouseenter", handleMouseEnter);
 			markerElement.removeEventListener("mouseleave", handleMouseLeave);
-
-			// Move content back
 			while (container.firstChild) {
 				wrapperElement?.appendChild(container.firstChild);
 			}

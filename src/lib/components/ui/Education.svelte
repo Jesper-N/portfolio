@@ -9,7 +9,7 @@
     </div>
 
     <TactileCard class="p-8 md:p-12 relative overflow-hidden group">
-        <!-- Background decorative elements -->
+        
         <div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-white/5 to-transparent pointer-events-none"></div>
         <div class="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-white/5 blur-3xl group-hover:bg-white/10 transition-colors duration-700"></div>
 
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <!-- Grade Badge -->
+            
             <div class="flex items-center gap-6">
                 <div class="text-right hidden md:block">
                     <div class="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-1">Final Grade</div>

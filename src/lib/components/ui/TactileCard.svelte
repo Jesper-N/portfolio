@@ -20,10 +20,10 @@
         )}
         {style}
     >
-        <!-- Noise Texture -->
+        
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat"></div>
         
-        <!-- Gloss Gradient -->
+        
         <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"></div>
 
         {@render children()}
@@ -36,7 +36,7 @@
         )}
         {style}
     >
-        <!-- Noise Texture -->
+        
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat"></div>
         
         {@render children()}

@@ -23,7 +23,7 @@
             interactive={true}
             class="h-[400px] flex flex-col p-2"
         >
-            <!-- Image Area -->
+            
             <div
                 class="relative h-[240px] w-full overflow-hidden rounded-lg bg-[#050505]"
             >
@@ -33,7 +33,7 @@
                     class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0"
                 />
 
-                <!-- Floating Tag -->
+                
                 <div
                     class="absolute top-3 right-3 rounded-full bg-black/60 backdrop-blur-md px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-white/80 border border-white/10"
                 >
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <!-- Content Area -->
+            
             <div class="flex flex-1 flex-col justify-between p-4 pt-6">
                 <div class="space-y-2">
                     <h3

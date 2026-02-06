@@ -28,7 +28,7 @@
     onmousemove={handleMouseMove}
     role="list"
 >
-    <!-- Floating Image Preview -->
+    
     {#if hoveredIndex !== null}
         <div 
             class="pointer-events-none fixed z-20 h-[400px] w-[300px] overflow-hidden rounded-sm object-cover opacity-0 transition-opacity duration-500 md:opacity-100"
@@ -43,7 +43,7 @@
                 alt="Project Preview" 
                 class="h-full w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
             />
-            <!-- Overlay Info -->
+            
             <div class="absolute bottom-0 left-0 w-full bg-black/50 p-4 backdrop-blur-md">
                  <span class="font-mono text-xs uppercase text-white tracking-widest">
                      {projects[hoveredIndex].category} // {projects[hoveredIndex].year}
@@ -52,7 +52,7 @@
         </div>
     {/if}
 
-    <!-- List Items -->
+    
     <div class="flex flex-col">
         {#each projects as project, i}
             <a 

@@ -4,29 +4,29 @@
 @import "tw-animate-css";
 
 :root {
-    /* Theme: Tactile Luxury */
+    
     --background: #080808; 
     --foreground: #ededed;
     
-    /* Subtle tints */
+    
     --card-bg: #0f0f0f;
     --card-border: #1f1f1f;
     
-    /* Accents */
+    
     --primary: #ffffff; 
     --primary-foreground: #000000;
     
     --muted: #1c1c1c;
     --muted-foreground: #666666;
     
-    /* The "Tactile" Glows */
+    
     --inner-glow: rgba(255, 255, 255, 0.03);
     --outer-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.5);
     
     --font-sans: "Geist Sans", sans-serif;
     --font-mono: "Geist Mono", monospace;
     
-    --radius: 12px; /* Slightly rounded for that "device" feel */
+    --radius: 12px; 
 }
 
 @theme inline {
@@ -49,7 +49,7 @@
 @layer utilities {
     .text-balance { text-wrap: balance; }
     
-    /* The "Tactile" Surface Utility */
+    
     .tactile-surface {
         background: linear-gradient(145deg, #0a0a0a, #0f0f0f);
         border: 1px solid rgba(255,255,255,0.03);
@@ -65,7 +65,7 @@
             0 1px 0 0 rgba(255,255,255,0.02);
     }
 
-    /* Grain Texture */
+    
     .bg-grain {
         position: fixed;
         top: 0;
@@ -85,7 +85,7 @@
 html {
     scroll-behavior: smooth;
     background-color: var(--background);
-    cursor: default; /* Fallback */
+    cursor: default; 
 }
 
 body {
@@ -94,13 +94,13 @@ body {
     overflow-x: hidden;
 }
 
-/* Custom Selection */
+
 ::selection {
     background-color: var(--foreground);
     color: var(--background);
 }
 
-/* Utilities for "Tactile" look */
+
 .tactile-grid {
     background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
     background-size: 24px 24px;

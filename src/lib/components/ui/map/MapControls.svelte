@@ -43,8 +43,6 @@
 		"bottom-left": "bottom-2 left-2",
 		"bottom-right": "bottom-10 right-2",
 	};
-
-	// Update compass rotation
 	$effect(() => {
 		const map = mapCtx.getMap();
 

@@ -17,8 +17,6 @@
         const handleMouseMove = (e: MouseEvent) => {
             coords.set({ x: e.clientX, y: e.clientY });
             isVisible = true;
-
-            // Check if hovering over clickable
             const target = e.target as HTMLElement;
             isHoveringLink = !!target.closest('a, button, [role="button"]');
         };
@@ -43,13 +41,13 @@
         ? 1
         : 0};"
 >
-    <!-- Core Dot -->
+    
     <div
         class="absolute top-0 left-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white transition-all duration-300"
         class:scale-[3]={isHoveringLink}
     ></div>
 
-    <!-- Outer Ring (Text Reader) -->
+    
     <div
         class="absolute top-0 left-0 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/40 transition-all duration-500"
         class:scale-0={isHoveringLink}
@@ -58,7 +56,7 @@
 </div>
 
 <style>
-    /* Global cursor hide */
+    
     :global(body),
     :global(a),
     :global(button) {

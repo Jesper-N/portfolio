@@ -12,7 +12,7 @@
 </div>
 
 <TactileCard class="p-8 md:p-12 relative overflow-hidden group border-white/10 mt-12 bg-white/[0.02]">
-    <!-- Inner Glow -->
+    
     <div class="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent pointer-events-none"></div>
 
     <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
@@ -33,10 +33,7 @@
              </div>
         </div>
 
-        <!-- Maybe a decorative element or just whitespace on the right for balance,
-             or we can move the name here?
-             Actually, keeping it clean text on the left is fine, but let's add a subtle
-             visual on the right side of this card to make it premium. -->
+        
         <div class="hidden md:flex justify-end items-center h-full opacity-20">
              <div class="h-32 w-32 rounded-full border border-white/20 relative animate-[spin_10s_linear_infinite]">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
