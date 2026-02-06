@@ -71,7 +71,7 @@
     </section>
 
     
-    <section>
+    <section id="education">
         <Education />
     </section>
 
@@ -90,7 +90,7 @@
     </section>
 
     
-    <section class="space-y-12">
+    <section id="hobbies" class="space-y-12">
         <div
             class="flex items-baseline justify-between border-b border-white/5 pb-4"
         >
@@ -104,7 +104,7 @@
     </section>
 
     
-    <footer class="pt-24 border-t border-white/5">
+    <footer id="contact" class="pt-24 border-t border-white/5">
         <div class="flex flex-col md:flex-row justify-between items-end gap-12">
             <div>
                 <h1

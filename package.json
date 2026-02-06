@@ -6,6 +6,7 @@
 	"dependencies": {
 		"@fontsource/geist-mono": "^5.2.7",
 		"@fontsource/geist-sans": "^5.1.0",
+		"@lucide/svelte": "^0.563.1",
 		"lenis": "^1.3.17",
 		"maplibre-gl": "^5.17.0"
 	},

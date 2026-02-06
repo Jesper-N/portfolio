@@ -8,12 +8,12 @@
 
     onMount(() => {
         const lenis = new Lenis({
-            duration: 0.5,
+            duration: 0.4,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
-            wheelMultiplier: 0.8,
+            wheelMultiplier: 1,
             touchMultiplier: 2,
         });
         let rafId = 0;
