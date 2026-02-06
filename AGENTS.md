@@ -41,6 +41,7 @@ pnpm preview
    - `$bindable()` for two-way binding
    - `$derived()` for computed values
    - `{@render children?.()}` for slots
+4. **Comments must be intentional** - Only add comments when code is non-obvious and the comment explains intent or a real constraint; do not add routine, restating, or decorative comments.
 
 ### Component Structure
 

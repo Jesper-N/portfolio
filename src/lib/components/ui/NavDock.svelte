@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    let links = [
+    const links = [
         { label: "Index", href: "#top" },
         { label: "Work", href: "#work" },
         { label: "About", href: "#about" },
@@ -12,13 +12,34 @@
     let lastScroll = 0;
 
     onMount(() => {
-        const handleScroll = () => {
+        let rafId = 0;
+        let ticking = false;
+
+        const updateVisibility = () => {
             const currentScroll = window.scrollY;
-            show = currentScroll < lastScroll || currentScroll < 100;
+            const nextShow = currentScroll < lastScroll || currentScroll < 100;
+
+            if (nextShow !== show) {
+                show = nextShow;
+            }
+
             lastScroll = currentScroll;
+            ticking = false;
         };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        const handleScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            rafId = requestAnimationFrame(updateVisibility);
+        };
+
+        lastScroll = window.scrollY;
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => {
+            cancelAnimationFrame(rafId);
+            window.removeEventListener("scroll", handleScroll);
+        };
     });
 </script>
 

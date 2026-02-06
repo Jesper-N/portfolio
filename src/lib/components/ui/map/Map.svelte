@@ -149,8 +149,10 @@
 	});
 
 	onDestroy(() => {
+		clearStyleTimeout();
 		map?.remove();
 		map = null;
+		isMounted = false;
 		isLoaded = false;
 		isStyleLoaded = false;
 	});

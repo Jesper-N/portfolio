@@ -1,5 +1,4 @@
 <script lang="ts">
-    import TactileCard from "$lib/components/ui/TactileCard.svelte";
     import ProjectGrid from "$lib/components/ui/ProjectGrid.svelte";
     import NavDock from "$lib/components/ui/NavDock.svelte";
     import InfoGrid from "$lib/components/ui/InfoGrid.svelte";
@@ -7,7 +6,7 @@
     import MagneticCursor from "$lib/components/ui/MagneticCursor.svelte";
     import HobbiesGrid from "$lib/components/ui/HobbiesGrid.svelte";
     import Hero from "$lib/components/ui/Hero.svelte";
-    let projects = [
+    const projects = [
         {
             id: "1",
             title: "EigenLayer Explorer",
@@ -58,6 +57,7 @@
 <div class="bg-grain"></div>
 
 <main
+    id="top"
     class="relative z-10 min-h-screen max-w-6xl mx-auto px-6 pt-16 pb-32 space-y-32"
 >
     

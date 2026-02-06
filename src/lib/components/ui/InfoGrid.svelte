@@ -1,10 +1,17 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import TactileCard from './TactileCard.svelte';
+    import { onMount } from "svelte";
+    import TactileCard from "./TactileCard.svelte";
     import Map from "$lib/components/ui/map/Map.svelte";
     import MapMarker from "$lib/components/ui/map/MapMarker.svelte";
 
     let time = $state(new Date());
+    const timeFormatter = new Intl.DateTimeFormat("en-DK", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZone: "Europe/Copenhagen",
+    });
+    const formattedTime = $derived(timeFormatter.format(time));
 
     onMount(() => {
         const interval = setInterval(() => {
@@ -55,7 +62,7 @@
                 <h3 class="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-1">Base of Operations</h3>
                 <h2 class="text-3xl font-medium text-white">Viborg, Denmark</h2>
                 <p class="text-sm text-muted-foreground mt-2 font-mono">
-                    {time.toLocaleTimeString('en-DK', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} (CET)
+                    {formattedTime} (CET)
                 </p>
             </div>
 

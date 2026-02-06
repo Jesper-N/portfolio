@@ -1,21 +1,21 @@
 <script lang="ts">
-    import { cn } from "$lib/utils";
     import SimRacing from "./SimRacing.svelte";
     import Esports from "./Esports.svelte";
 
-    let container: HTMLDivElement;
     let mouseX = $state<number | null>(null);
     let mouseY = $state<number | null>(null);
     const SIM_RACING_COLOR = "rgba(249, 115, 22, 0.15)";
     const ESPORTS_COLOR = "rgba(59, 130, 246, 0.15)";
 
     function handleMouseMove(e: MouseEvent) {
-        const target = e.target as HTMLElement;
-        const isOverCard = target.closest('.sim-racing-card') || target.closest('.esports-card');
+        const target = e.target as HTMLElement | null;
+        const isOverCard = target?.closest(".sim-racing-card, .esports-card");
 
         if (!isOverCard) {
-            mouseX = null;
-            mouseY = null;
+            if (mouseX !== null || mouseY !== null) {
+                mouseX = null;
+                mouseY = null;
+            }
             return;
         }
 
@@ -30,7 +30,6 @@
 </script>
 
 <div 
-    bind:this={container}
     class="grid grid-cols-1 md:grid-cols-2 gap-6 md:h-[600px] h-auto"
     onmousemove={handleMouseMove}
     onmouseleave={handleMouseLeave}

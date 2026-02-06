@@ -99,10 +99,12 @@
 		marker = markerInstance;
 		if (onclick) container.addEventListener("click", onclick);
 		if (onmouseenter) container.addEventListener("mouseenter", onmouseenter);
+		let handleMouseLeave: ((e: MouseEvent) => void) | null = null;
 		if (onmouseleave) {
-			container.addEventListener("mouseleave", (e) => {
+			handleMouseLeave = (e) => {
 				if (!isDragging) onmouseleave(e);
-			});
+			};
+			container.addEventListener("mouseleave", handleMouseLeave);
 		}
 		const handleDragStart = () => {
 			isDragging = true;
@@ -129,7 +131,7 @@
 		return () => {
 			if (onclick) container.removeEventListener("click", onclick);
 			if (onmouseenter) container.removeEventListener("mouseenter", onmouseenter);
-			if (onmouseleave) container.removeEventListener("mouseleave", onmouseleave);
+			if (handleMouseLeave) container.removeEventListener("mouseleave", handleMouseLeave);
 
 			if (draggable) {
 				markerInstance.off("dragstart", handleDragStart);

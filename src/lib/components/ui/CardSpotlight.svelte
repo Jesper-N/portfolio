@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { spring } from "svelte/motion";
 
     let {
@@ -41,7 +40,7 @@
                 y: mouseY - rect.top,
             });
             opacity = 1;
-        } else if (mouseX === null && mouseY === null) {
+        } else if (mouseX === null || mouseY === null) {
             opacity = 0;
         }
     });

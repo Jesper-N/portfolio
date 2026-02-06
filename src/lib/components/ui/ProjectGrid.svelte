@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { cn } from "$lib/utils";
     import TactileCard from "./TactileCard.svelte";
 
     let {
@@ -17,7 +16,7 @@
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-    {#each projects as project}
+    {#each projects as project (project.id)}
         <TactileCard
             href="/project/{project.id}"
             interactive={true}
@@ -57,7 +56,7 @@
                 </div>
 
                 <div class="flex flex-wrap gap-2 pt-4">
-                    {#each project.tags as tag}
+                    {#each project.tags as tag (`${project.id}-${tag}`)}
                         <span
                             class="text-[10px] font-mono uppercase tracking-wider text-white/40"
                         >

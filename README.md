@@ -2,87 +2,65 @@
 
 Personal portfolio built with SvelteKit 2 and Svelte 5, with a tactile UI system, animated interactions, and curated project sections.
 
-## Overview
+## What is in this repo
 
-This repository contains a single-page portfolio site with distinct sections for:
+This is a single-page portfolio with sections for a hero, about/info grid, education, projects, hobbies, and a floating bottom dock.
 
-- Hero introduction
-- About (location and skills)
-- Education
-- Selected projects
-- Hobbies
-
-The visual style uses dark tactile surfaces, subtle grain overlays, and Geist Sans/Mono typography.
+The style is intentionally dark and tactile, with subtle motion and custom UI components.
 
 ## Tech stack
 
 - SvelteKit 2 + Svelte 5 (runes mode)
 - TypeScript (strict mode)
 - Tailwind CSS v4 + `tw-animate-css`
-- `tailwind-variants` + `bits-ui`
-- Lenis (smooth scrolling)
-- Map component built with MapLibre GL + D3/TopoJSON utilities
+- `tailwind-variants`, `bits-ui`, `clsx`, `tailwind-merge`
+- Lenis for smooth scrolling
+- MapLibre GL for the map card
 - pnpm
 
-## Features
+## Key files
 
-- Smooth scrolling initialized in `portfolio/src/routes/+layout.svelte` via Lenis
-- Floating bottom dock navigation in `portfolio/src/lib/components/ui/NavDock.svelte`
-- Reusable tactile card primitives in `portfolio/src/lib/components/ui/TactileCard.svelte`
-- Responsive project grid in `portfolio/src/lib/components/ui/ProjectGrid.svelte`
-- Interactive location card with map marker in `portfolio/src/lib/components/ui/InfoGrid.svelte`
-- Modular UI component organization under `portfolio/src/lib/components/ui/`
+- `src/routes/+layout.svelte`: global layout and Lenis setup
+- `src/routes/+page.svelte`: page composition and content
+- `src/routes/layout.css`: theme tokens and global styles
+- `src/lib/components/ui/TactileCard.svelte`: base card primitive
+- `src/lib/components/ui/ProjectGrid.svelte`: projects grid
+- `src/lib/components/ui/map/Map.svelte`: map wrapper
+- `src/lib/components/ui/map/MapMarker.svelte`: map marker primitive
 
 ## Project structure
 
 ```text
 src/
   routes/
-    +layout.svelte         # Global layout, Lenis setup, app wrapper
-    +page.svelte           # Main portfolio page composition
-    layout.css             # Theme tokens, utilities, global styles
+    +layout.svelte
+    +page.svelte
+    layout.css
   lib/
     components/
-      ui/                  # Reusable UI primitives and feature components
+      ui/
+        map/
 ```
 
-## Getting started
+## Development
 
-### Prerequisites
-
-- Node.js 20+ (current LTS recommended)
+Prerequisites:
+- Node.js 20+
 - pnpm
 
-### Setup
+Commands:
 
 ```bash
 pnpm install
 pnpm dev
+pnpm build
+pnpm preview
+pnpm check
+pnpm check:watch
 ```
 
-Then open `http://localhost:5173` (Vite default).
+Default local URL: `http://localhost:5173`.
 
-## Available scripts
+## Build adapter
 
-- `pnpm dev` - Start the development server.
-- `pnpm build` - Build production assets.
-- `pnpm preview` - Preview the production build locally.
-- `pnpm check` - Run Svelte sync + TypeScript checks (required quality gate).
-- `pnpm check:watch` - Run checks in watch mode.
-
-## Build and deployment
-
-This project currently uses `@sveltejs/adapter-auto` in `portfolio/svelte.config.js`.
-
-For fixed deployment targets (for example Vercel, Netlify, or a Node adapter), replace adapter-auto with the platform-specific SvelteKit adapter.
-
-## Content customization
-
-- Main page content: `portfolio/src/routes/+page.svelte`
-- Hero copy: `portfolio/src/lib/components/ui/Hero.svelte`
-- Theme tokens and global styling: `portfolio/src/routes/layout.css`
-
-## Notes
-
-- No license is declared in this repository at the time of writing.
-- This README intentionally omits contribution workflow and social link sections.
+`svelte.config.js` currently uses `@sveltejs/adapter-auto`.
