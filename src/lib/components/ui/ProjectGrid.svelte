@@ -19,7 +19,6 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
     {#each projects as project (project.id)}
         <TactileCard
-            href="/project/{project.id}"
             interactive={true}
             class="h-[400px] flex flex-col p-2"
         >
@@ -30,6 +29,9 @@
                 <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
                     class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0"
                 />
 

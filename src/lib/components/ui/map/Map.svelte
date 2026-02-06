@@ -30,7 +30,7 @@
 	let {
 		children,
 		styles,
-		theme: _theme = "light",
+		theme,
 		projection,
 		center = [13.405, 52.52],
 		zoom = 0,
@@ -44,13 +44,17 @@
 	let isStyleLoaded = $state(false);
 	let initialStyleApplied = false;
 	let styleTimeoutId: ReturnType<typeof setTimeout> | null = null;
+	let previousCenter: [number, number] | null = null;
+	let previousZoom: number | null = null;
+	let hasSyncedPosition = false;
 
 	const mapStyles = $derived({
 		dark: styles?.dark ?? defaultStyles.dark,
 		light: styles?.light ?? defaultStyles.light,
 	});
 
-	const currentStyle = $derived(tailwindTheme === "light" ? mapStyles.light : mapStyles.dark);
+	const activeTheme = $derived(theme ?? tailwindTheme);
+	const currentStyle = $derived(activeTheme === "light" ? mapStyles.light : mapStyles.dark);
 
 	const isReady = $derived(isMounted && isLoaded && isStyleLoaded);
 
@@ -69,7 +73,7 @@
 	onMount(() => {
 		isMounted = true;
 
-		if (browser) {
+		if (browser && theme === undefined) {
 			const root = document.documentElement;
 
 			const updateTheme = () => {
@@ -142,10 +146,24 @@
 		}
 
 		const [lng, lat] = center;
+		const hasCenterChanged =
+			previousCenter === null || previousCenter[0] !== lng || previousCenter[1] !== lat;
+		const hasZoomChanged = previousZoom === null || previousZoom !== zoom;
+		if (!hasCenterChanged && !hasZoomChanged) {
+			return;
+		}
 
 		untrack(() => {
-			map!.easeTo({ center: [lng, lat], zoom });
+			const nextPosition = { center: [lng, lat] as [number, number], zoom };
+			if (!hasSyncedPosition) {
+				map!.jumpTo(nextPosition);
+				hasSyncedPosition = true;
+			} else {
+				map!.easeTo(nextPosition);
+			}
 		});
+		previousCenter = [lng, lat];
+		previousZoom = zoom;
 	});
 
 	onDestroy(() => {
@@ -155,6 +173,9 @@
 		isMounted = false;
 		isLoaded = false;
 		isStyleLoaded = false;
+		previousCenter = null;
+		previousZoom = null;
+		hasSyncedPosition = false;
 	});
 </script>
 

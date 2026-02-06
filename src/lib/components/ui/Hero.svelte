@@ -2,17 +2,76 @@
     import TactileCard from "$lib/components/ui/TactileCard.svelte";
     import CardSpotlight from "$lib/components/ui/CardSpotlight.svelte";
     import { Button } from "$lib/components/ui/button/index.js";
-    import HeroScene from "$lib/components/ui/HeroScene.svelte";
     import { onMount } from "svelte";
 
+    type HeroSceneComponent = typeof import("$lib/components/ui/HeroScene.svelte").default;
+
     let scrollIndicatorVisible = $state(true);
+    let heroScenePromise = $state<Promise<HeroSceneComponent> | null>(null);
+    let heroSceneContainerRef: HTMLDivElement | null = $state(null);
+    let shouldLoadHeroScene = $state(false);
+
+    $effect(() => {
+        if (!shouldLoadHeroScene || heroScenePromise) return;
+        heroScenePromise = import("$lib/components/ui/HeroScene.svelte").then((module) => module.default);
+    });
 
     onMount(() => {
         const handleScroll = () => {
             scrollIndicatorVisible = window.scrollY < 400;
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        const mediaQuery = window.matchMedia("(min-width: 768px)");
+        let observer: IntersectionObserver | null = null;
+
+        const connectObserver = () => {
+            if (
+                observer ||
+                shouldLoadHeroScene ||
+                typeof IntersectionObserver === "undefined" ||
+                !heroSceneContainerRef
+            ) {
+                return;
+            }
+
+            observer = new IntersectionObserver(
+                (entries) => {
+                    if (!mediaQuery.matches) return;
+                    if (entries.some((entry) => entry.isIntersecting)) {
+                        shouldLoadHeroScene = true;
+                        observer?.disconnect();
+                        observer = null;
+                    }
+                },
+                { rootMargin: "120px 0px" },
+            );
+            observer.observe(heroSceneContainerRef);
+        };
+
+        const handleViewportChange = () => {
+            if (!mediaQuery.matches) {
+                observer?.disconnect();
+                observer = null;
+                return;
+            }
+
+            if (typeof IntersectionObserver === "undefined") {
+                shouldLoadHeroScene = true;
+                return;
+            }
+
+            connectObserver();
+        };
+
+        handleViewportChange();
+        mediaQuery.addEventListener("change", handleViewportChange);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            mediaQuery.removeEventListener("change", handleViewportChange);
+            observer?.disconnect();
+        };
     });
 </script>
 
@@ -100,12 +159,24 @@
             </div>
 
             <!-- Right column: 3D scene-->
-            <div class="hidden md:block md:col-span-2 relative min-h-85">
+            <div
+                bind:this={heroSceneContainerRef}
+                class="hidden md:block md:col-span-2 relative min-h-85"
+                style="position: relative; min-height: 21.25rem; background-color: #09090b;"
+            >
                 <!-- Subtle vertical divider -->
                 <div class="absolute left-0 top-8 bottom-8 w-px bg-linear-to-b from-transparent via-white/6 to-transparent"></div>
 
-                <!-- 3D Threlte scene -->
-                <HeroScene />
+                <!-- 3D scene -->
+                {#if heroScenePromise}
+                    {#await heroScenePromise}
+                        <div style="position: absolute; inset: 0; background-color: #09090b;" aria-hidden="true"></div>
+                    {:then HeroScene}
+                        <HeroScene />
+                    {/await}
+                {:else}
+                    <div style="position: absolute; inset: 0; background-color: #09090b;" aria-hidden="true"></div>
+                {/if}
 
                 <!-- Bottom ambient glow beneath the 3D object -->
                 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-32 h-8 bg-sky-400/6 blur-2xl rounded-full pointer-events-none"></div>

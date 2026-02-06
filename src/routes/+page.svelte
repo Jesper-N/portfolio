@@ -114,9 +114,9 @@
             <div
                 class="flex gap-8 mb-4 md:mb-8 font-mono text-sm text-muted-foreground"
             >
-                <a href="#" class="hover:text-white transition-colors">GitHub</a
+                <a href="https://github.com/your-username" class="hover:text-white transition-colors">GitHub</a
                 >
-                <a href="#" class="hover:text-white transition-colors"
+                <a href="https://linkedin.com/in/your-handle" class="hover:text-white transition-colors"
                     >LinkedIn</a
                 >
             </div>

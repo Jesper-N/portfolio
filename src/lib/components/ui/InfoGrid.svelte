@@ -1,9 +1,26 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import TactileCard from "./TactileCard.svelte";
-    import Map from "$lib/components/ui/map/Map.svelte";
-    import MapMarker from "$lib/components/ui/map/MapMarker.svelte";
     import TechStackCard from "./TechStackCard.svelte";
+
+    type MapComponent = typeof import("$lib/components/ui/map/Map.svelte").default;
+    type MapMarkerComponent = typeof import("$lib/components/ui/map/MapMarker.svelte").default;
+
+    interface LoadedMapComponents {
+        Map: MapComponent;
+        MapMarker: MapMarkerComponent;
+    }
+
+    const MAP_CENTER: [number, number] = [9.4, 56.45];
+    const MAP_ZOOM = 11;
+    const MAP_STYLES = {
+        dark: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+        light: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    };
+    const MAP_OPTIONS = {
+        interactive: false,
+        attributionControl: false as const,
+    };
 
     let time = $state(new Date());
     const timeFormatter = new Intl.DateTimeFormat("en-DK", {
@@ -15,12 +32,45 @@
     const formattedTime = $derived(timeFormatter.format(time));
 
     let hovered = $state(false);
+    let mapContainerRef: HTMLDivElement | null = $state(null);
+    let mapComponentsPromise = $state<Promise<LoadedMapComponents> | null>(null);
+
+    function loadMapComponents() {
+        if (mapComponentsPromise) return;
+        mapComponentsPromise = Promise.all([
+            import("$lib/components/ui/map/Map.svelte"),
+            import("$lib/components/ui/map/MapMarker.svelte"),
+        ]).then(([mapModule, mapMarkerModule]) => ({
+            Map: mapModule.default,
+            MapMarker: mapMarkerModule.default,
+        }));
+    }
 
     onMount(() => {
         const interval = setInterval(() => {
             time = new Date();
         }, 1000);
-        return () => clearInterval(interval);
+
+        let observer: IntersectionObserver | null = null;
+        if (typeof IntersectionObserver === "undefined" || !mapContainerRef) {
+            loadMapComponents();
+        } else {
+            observer = new IntersectionObserver(
+                (entries) => {
+                    if (entries.some((entry) => entry.isIntersecting)) {
+                        loadMapComponents();
+                        observer?.disconnect();
+                    }
+                },
+                { rootMargin: "200px 0px" },
+            );
+            observer.observe(mapContainerRef);
+        }
+
+        return () => {
+            clearInterval(interval);
+            observer?.disconnect();
+        };
     });
 </script>
 
@@ -33,30 +83,37 @@
     >
         <!-- Map fills entire card, brightness controlled via JS for smooth 60fps -->
         <div
+            bind:this={mapContainerRef}
             class="absolute inset-0 z-0 map-container"
             class:map-active={hovered}
             onmouseenter={() => hovered = true}
             onmouseleave={() => hovered = false}
             role="presentation"
         >
-            <Map
-                center={[9.40, 56.45]}
-                zoom={11}
-                styles={{
-                    dark: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-                    light: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
-                }}
-                theme="dark"
-                options={{
-                    interactive: false,
-                    attributionControl: false
-                }}
-            >
-                <MapMarker longitude={9.40} latitude={56.45}>
-                    <div class="h-3 w-3 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.8)] animate-pulse"></div>
-                    <div class="absolute inset-0 h-3 w-3 rounded-full border border-green-500/50 animate-[ping_2s_linear_infinite]"></div>
-                </MapMarker>
-            </Map>
+            {#if mapComponentsPromise}
+                {#await mapComponentsPromise}
+                    <div class="absolute inset-0 bg-[#0a0a0a]"></div>
+                {:then components}
+                    {@const Map = components.Map}
+                    {@const MapMarker = components.MapMarker}
+                    <Map
+                        center={MAP_CENTER}
+                        zoom={MAP_ZOOM}
+                        styles={MAP_STYLES}
+                        theme="dark"
+                        options={MAP_OPTIONS}
+                    >
+                        <MapMarker longitude={MAP_CENTER[0]} latitude={MAP_CENTER[1]}>
+                            <div class="h-3 w-3 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.8)] animate-pulse"></div>
+                            <div class="absolute inset-0 h-3 w-3 rounded-full border border-green-500/50 animate-[ping_2s_linear_infinite]"></div>
+                        </MapMarker>
+                    </Map>
+                {:catch}
+                    <div class="absolute inset-0 bg-[#0a0a0a]"></div>
+                {/await}
+            {:else}
+                <div class="absolute inset-0 bg-[#0a0a0a]"></div>
+            {/if}
         </div>
 
         <!-- Text at top left -->

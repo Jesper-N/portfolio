@@ -26,6 +26,7 @@
     <div 
         class={cn(
             "relative flex flex-col rounded-xl border border-white/10 bg-card text-card-foreground",
+            interactive && "transition-all duration-300 hover:border-white/20 hover:bg-card/80",
             className
         )}
         {style}
