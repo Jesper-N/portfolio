@@ -6,6 +6,7 @@
     import MagneticCursor from "$lib/components/ui/MagneticCursor.svelte";
     import HobbiesGrid from "$lib/components/ui/HobbiesGrid.svelte";
     import Hero from "$lib/components/ui/Hero.svelte";
+
     const projects = [
         {
             id: "1",
@@ -53,29 +54,26 @@
 <MagneticCursor />
 <NavDock />
 
-
-<div class="bg-grain"></div>
-
 <main
     id="top"
     class="relative z-10 min-h-screen max-w-6xl mx-auto px-6 pt-16 pb-32 space-y-32"
 >
-    
+
     <section>
         <Hero />
     </section>
 
-    
+
     <section id="about">
         <InfoGrid />
     </section>
 
-    
+
     <section id="education">
         <Education />
     </section>
 
-    
+
     <section id="work" class="space-y-12">
         <div
             class="flex items-baseline justify-between border-b border-white/5 pb-4"
@@ -89,7 +87,7 @@
         <ProjectGrid {projects} />
     </section>
 
-    
+
     <section id="hobbies" class="space-y-12">
         <div
             class="flex items-baseline justify-between border-b border-white/5 pb-4"
@@ -103,7 +101,7 @@
         <HobbiesGrid />
     </section>
 
-    
+
     <footer id="contact" class="pt-24 border-t border-white/5">
         <div class="flex flex-col md:flex-row justify-between items-end gap-12">
             <div>
