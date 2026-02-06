@@ -190,7 +190,7 @@
 </script>
 
 <div
-    class="fixed inset-x-0 bottom-6 z-50 flex justify-center px-3 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] sm:bottom-10 {isVisible
+    class="fixed inset-x-0 bottom-6 z-50 hidden md:flex justify-center px-3 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] sm:bottom-10 {isVisible
         ? 'translate-y-0 opacity-100'
         : 'translate-y-32 opacity-0 pointer-events-none'}"
 >
