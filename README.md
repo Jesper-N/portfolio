@@ -1,42 +1,88 @@
-# sv
+# Portfolio
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Personal portfolio built with SvelteKit 2 and Svelte 5, with a tactile UI system, animated interactions, and curated project sections.
 
-## Creating a project
+## Overview
 
-If you're seeing this, you've probably already done this step. Congrats!
+This repository contains a single-page portfolio site with distinct sections for:
 
-```sh
-# create a new project
-npx sv create my-app
+- Hero introduction
+- About (location and skills)
+- Education
+- Selected projects
+- Hobbies
+
+The visual style uses dark tactile surfaces, subtle grain overlays, and Geist Sans/Mono typography.
+
+## Tech stack
+
+- SvelteKit 2 + Svelte 5 (runes mode)
+- TypeScript (strict mode)
+- Tailwind CSS v4 + `tw-animate-css`
+- `tailwind-variants` + `bits-ui`
+- Lenis (smooth scrolling)
+- Map component built with MapLibre GL + D3/TopoJSON utilities
+- pnpm
+
+## Features
+
+- Smooth scrolling initialized in `portfolio/src/routes/+layout.svelte` via Lenis
+- Floating bottom dock navigation in `portfolio/src/lib/components/ui/NavDock.svelte`
+- Reusable tactile card primitives in `portfolio/src/lib/components/ui/TactileCard.svelte`
+- Responsive project grid in `portfolio/src/lib/components/ui/ProjectGrid.svelte`
+- Interactive location card with map marker in `portfolio/src/lib/components/ui/InfoGrid.svelte`
+- Modular UI component organization under `portfolio/src/lib/components/ui/`
+
+## Project structure
+
+```text
+src/
+  routes/
+    +layout.svelte         # Global layout, Lenis setup, app wrapper
+    +page.svelte           # Main portfolio page composition
+    layout.css             # Theme tokens, utilities, global styles
+  lib/
+    components/
+      ui/                  # Reusable UI primitives and feature components
 ```
 
-To recreate this project with the same configuration:
+## Getting started
 
-```sh
-# recreate this project
-pnpm dlx sv create --template minimal --types ts --add tailwindcss="plugins:none" --install pnpm ./
+### Prerequisites
+
+- Node.js 20+ (current LTS recommended)
+- pnpm
+
+### Setup
+
+```bash
+pnpm install
+pnpm dev
 ```
 
-## Developing
+Then open `http://localhost:5173` (Vite default).
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Available scripts
 
-```sh
-npm run dev
+- `pnpm dev` - Start the development server.
+- `pnpm build` - Build production assets.
+- `pnpm preview` - Preview the production build locally.
+- `pnpm check` - Run Svelte sync + TypeScript checks (required quality gate).
+- `pnpm check:watch` - Run checks in watch mode.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Build and deployment
 
-## Building
+This project currently uses `@sveltejs/adapter-auto` in `portfolio/svelte.config.js`.
 
-To create a production version of your app:
+For fixed deployment targets (for example Vercel, Netlify, or a Node adapter), replace adapter-auto with the platform-specific SvelteKit adapter.
 
-```sh
-npm run build
-```
+## Content customization
 
-You can preview the production build with `npm run preview`.
+- Main page content: `portfolio/src/routes/+page.svelte`
+- Hero copy: `portfolio/src/lib/components/ui/Hero.svelte`
+- Theme tokens and global styling: `portfolio/src/routes/layout.css`
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Notes
+
+- No license is declared in this repository at the time of writing.
+- This README intentionally omits contribution workflow and social link sections.
