@@ -29,13 +29,13 @@
         <p
             class="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6 border-b border-white/5 pb-6"
         >
-            Across all titles played
+            Across all FPS titles played
         </p>
 
-        
+
         <div class="pointer-events-auto">
             <div class="space-y-4">
-                
+
                 <div
                     class="flex items-center justify-between border-b border-white/5 pb-2"
                 >
