@@ -73,7 +73,7 @@
     };
     const TOP_VISIBILITY_THRESHOLD = 90;
 
-    let isVisible = $state(true);
+    let isVisible = $state(false);
 
     let sectionWidths = $state(sectionLinks.map(() => BASE_WIDTH));
     let socialWidths = $state(socialLinks.map(() => BASE_WIDTH));
@@ -160,11 +160,19 @@
         let rafId = 0;
         let isTicking = false;
         let lastScroll = window.scrollY;
+        let hasSeenFirstScrollUp = false;
 
         const updateVisibility = () => {
             const currentScroll = window.scrollY;
+            const isScrollingUp = currentScroll < lastScroll;
+
+            if (!hasSeenFirstScrollUp && isScrollingUp) {
+                hasSeenFirstScrollUp = true;
+            }
+
             const nextVisible =
-                currentScroll < lastScroll || currentScroll < TOP_VISIBILITY_THRESHOLD;
+                hasSeenFirstScrollUp &&
+                (isScrollingUp || currentScroll < TOP_VISIBILITY_THRESHOLD);
 
             if (nextVisible !== isVisible) {
                 isVisible = nextVisible;
