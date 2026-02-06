@@ -58,12 +58,12 @@
         },
     ];
 
-    const BASE_WIDTH = 38;
-    const MAGNIFICATION = 60;
-    const EFFECT_DISTANCE = 140;
+    const BASE_WIDTH = 40;
+    const MAGNIFICATION = 64;
+    const EFFECT_DISTANCE = 160;
     const SPRING_CONFIG = {
-        stiffness: 0.2,
-        damping: 0.6,
+        stiffness: 0.15,
+        damping: 0.5,
     };
     const TOP_VISIBILITY_THRESHOLD = 90;
 
@@ -184,32 +184,53 @@
 </script>
 
 <div
-    class="fixed inset-x-0 bottom-5 z-50 flex justify-center px-3 transition-all duration-300 sm:bottom-8 {isVisible
+    class="fixed inset-x-0 bottom-6 z-50 flex justify-center px-3 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] sm:bottom-10 {isVisible
         ? 'translate-y-0 opacity-100'
-        : 'translate-y-24 opacity-0 pointer-events-none'}"
+        : 'translate-y-32 opacity-0 pointer-events-none'}"
 >
     <nav
         data-slot="nav-dock"
         onmousemove={handleMouseMove}
         onmouseleave={handleMouseLeave}
-        class="mx-auto mt-8 flex h-[58px] w-max items-center gap-2 rounded-2xl border border-white/12 bg-black/60 p-2 shadow-[0_18px_44px_-22px_rgba(0,0,0,0.9)] supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 backdrop-blur-md"
+        class="
+            mx-auto mt-8 flex h-[68px] w-max items-center gap-2 rounded-full 
+            border border-white/[0.08] bg-[#050505]/60 px-3 
+            shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] 
+            backdrop-blur-xl supports-backdrop-blur:bg-black/40
+            relative overflow-hidden
+        "
         aria-label="Dock navigation"
     >
+        <!-- Shimmer effect -->
+        <div class="absolute inset-0 -translate-x-full animate-[shimmer_8s_infinite] bg-gradient-to-r from-transparent via-white/[0.03] to-transparent pointer-events-none"></div>
+
         {#each sectionLinks as link, index (link.id)}
             {@const Icon = link.icon}
             <div
                 use:registerSectionNode={index}
-                class="flex aspect-square cursor-pointer items-center justify-center rounded-full"
+                class="flex aspect-square cursor-pointer items-center justify-center rounded-full relative z-10"
                 style={`width: ${sectionWidths[index]}px;`}
             >
                 <a
                     href={link.href}
                     aria-label={link.label}
-                    class="group relative flex size-full items-center justify-center rounded-full p-3 text-white/90 transition-all duration-200 hover:bg-zinc-900/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    class="
+                        group relative flex size-full items-center justify-center rounded-full p-2.5 
+                        text-white/60 transition-all duration-200 
+                        hover:bg-white/[0.08] hover:text-white 
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20
+                    "
                 >
-                    <Icon size={22} strokeWidth={1.2} />
+                    <Icon class="w-full h-full" strokeWidth={1.5} />
                     <span
-                        class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 rounded-md bg-black px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 group-focus-visible:-translate-y-1 group-focus-visible:opacity-100"
+                        class="
+                            pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 
+                            rounded-lg border border-white/10 bg-[#0a0a0a]/90 px-3 py-1.5 
+                            text-[10px] font-mono font-medium tracking-wide text-white opacity-0 blur-sm
+                            transition-all duration-200 
+                            group-hover:-translate-y-1 group-hover:opacity-100 group-hover:blur-0
+                            before:absolute before:inset-x-0 before:-bottom-1.5 before:mx-auto before:h-1.5 before:w-1.5 before:rotate-45 before:bg-[#0a0a0a]/90 before:border-r before:border-b before:border-white/10
+                        "
                     >
                         {link.label}
                     </span>
@@ -217,13 +238,13 @@
             </div>
         {/each}
 
-        <div class="h-full w-[0.6px] bg-white/20"></div>
+        <div class="h-8 w-[1px] bg-white/10 mx-1"></div>
 
         {#each socialLinks as link, index (link.id)}
             {@const Icon = link.icon}
             <div
                 use:registerSocialNode={index}
-                class="flex aspect-square cursor-pointer items-center justify-center rounded-full"
+                class="flex aspect-square cursor-pointer items-center justify-center rounded-full relative z-10"
                 style={`width: ${socialWidths[index]}px;`}
             >
                 <a
@@ -231,11 +252,23 @@
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noreferrer noopener" : undefined}
                     aria-label={link.label}
-                    class="group relative flex size-full items-center justify-center rounded-full p-3 text-white/90 transition-all duration-200 hover:bg-zinc-900/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    class="
+                        group relative flex size-full items-center justify-center rounded-full p-2.5 
+                        text-white/60 transition-all duration-200 
+                        hover:bg-white/[0.08] hover:text-white 
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20
+                    "
                 >
-                    <Icon size={21} strokeWidth={1.6} />
+                    <Icon class="w-full h-full" strokeWidth={1.5} />
                     <span
-                        class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 rounded-md bg-black px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 group-focus-visible:-translate-y-1 group-focus-visible:opacity-100"
+                        class="
+                             pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 
+                            rounded-lg border border-white/10 bg-[#0a0a0a]/90 px-3 py-1.5 
+                            text-[10px] font-mono font-medium tracking-wide text-white opacity-0 blur-sm
+                            transition-all duration-200 
+                            group-hover:-translate-y-1 group-hover:opacity-100 group-hover:blur-0
+                            before:absolute before:inset-x-0 before:-bottom-1.5 before:mx-auto before:h-1.5 before:w-1.5 before:rotate-45 before:bg-[#0a0a0a]/90 before:border-r before:border-b before:border-white/10
+                        "
                     >
                         {link.label}
                     </span>
