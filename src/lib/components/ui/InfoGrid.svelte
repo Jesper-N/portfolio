@@ -14,6 +14,8 @@
     });
     const formattedTime = $derived(timeFormatter.format(time));
 
+    let hovered = $state(false);
+
     onMount(() => {
         const interval = setInterval(() => {
             time = new Date();
@@ -24,10 +26,20 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    <TactileCard class="min-h-75 flex flex-col justify-between relative overflow-hidden group p-0">
-
-        <div class="absolute inset-0 z-0 opacity-50 transition-opacity duration-700 group-hover:opacity-100 grayscale group-hover:grayscale-0">
-             <Map
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <TactileCard
+        class="min-h-75 flex flex-col justify-between relative overflow-hidden p-0"
+        style="isolation: isolate;"
+    >
+        <!-- Map fills entire card, brightness controlled via JS for smooth 60fps -->
+        <div
+            class="absolute inset-0 z-0 map-container"
+            class:map-active={hovered}
+            onmouseenter={() => hovered = true}
+            onmouseleave={() => hovered = false}
+            role="presentation"
+        >
+            <Map
                 center={[9.40, 56.45]}
                 zoom={11}
                 styles={{
@@ -47,21 +59,19 @@
             </Map>
         </div>
 
+        <!-- Text at top left -->
+        <div class="relative z-10 p-8 pointer-events-none">
+            <h3 class="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-1">Located Near</h3>
+            <h2 class="text-3xl font-medium text-white">Viborg, Denmark</h2>
+            <p class="text-sm text-muted-foreground mt-2 font-mono">
+                {formattedTime} (CET)
+            </p>
+        </div>
 
-        <div class="absolute inset-0 z-10 bg-linear-to-t from-[#151515] via-[#151515]/60 to-transparent pointer-events-none"></div>
-
-
-        <div class="relative z-20 p-8 h-full flex flex-col justify-between pointer-events-none">
-            <div>
-                <h3 class="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-1">Located Near</h3>
-                <h2 class="text-3xl font-medium text-white">Viborg, Denmark</h2>
-                <p class="text-sm text-muted-foreground mt-2 font-mono">
-                    {formattedTime} (CET)
-                </p>
-            </div>
-
+        <!-- Status at bottom with scrim -->
+        <div class="relative z-10 mt-auto p-8 pt-12 map-text-scrim pointer-events-none">
             <div class="flex items-center gap-3 text-sm text-muted-foreground/80">
-                <span class="flex h-2 w-2">
+                <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                 </span>
@@ -70,6 +80,27 @@
         </div>
     </TactileCard>
 
-
     <TechStackCard />
 </div>
+
+<style>
+    .map-container {
+        opacity: 0.4;
+        transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .map-container.map-active {
+        opacity: 1;
+    }
+
+    .map-text-scrim {
+        background: linear-gradient(
+            to top,
+            oklch(0.13 0 0) 0%,
+            oklch(0.13 0 0 / 0.92) 20%,
+            oklch(0.13 0 0 / 0.7) 45%,
+            oklch(0.13 0 0 / 0.3) 70%,
+            oklch(0.13 0 0 / 0) 100%
+        );
+    }
+</style>

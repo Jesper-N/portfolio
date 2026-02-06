@@ -1,44 +1,129 @@
 <script lang="ts">
     import TactileCard from "$lib/components/ui/TactileCard.svelte";
+    import CardSpotlight from "$lib/components/ui/CardSpotlight.svelte";
     import { Button } from "$lib/components/ui/button/index.js";
+    import HeroScene from "$lib/components/ui/HeroScene.svelte";
+    import { onMount } from "svelte";
+
+    let scrollIndicatorVisible = $state(true);
+
+    onMount(() => {
+        const handleScroll = () => {
+            scrollIndicatorVisible = window.scrollY < 200;
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    });
 </script>
 
-<div class="space-y-4">
-    <h1 class="font-sans text-6xl md:text-8xl font-medium tracking-tighter text-white">
-       Jesper Nielsen
-   </h1>
-   <p class="font-mono text-sm md:text-base text-muted-foreground pt-4 max-w-xl">
-       FULL STACK DEVELOPER
-   </p>
-</div>
+<!-- Name reveal -->
+<div class="space-y-5">
+    <h1 class="font-sans text-6xl md:text-[7rem] lg:text-[8.5rem] font-medium tracking-tighter text-white leading-[0.9]">
+        <span class="block overflow-hidden">
+            <span
+                class="inline-block animate-[revealUp_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards]"
+                style="opacity: 0; transform: translateY(110%)"
+            >Jesper</span>
+        </span>
+        <span class="block overflow-hidden">
+            <span
+                class="inline-block animate-[revealUp_0.8s_cubic-bezier(0.22,1,0.36,1)_0.15s_forwards]"
+                style="opacity: 0; transform: translateY(110%)"
+            >Nielsen</span>
+        </span>
+    </h1>
 
-<TactileCard class="p-8 md:p-12 relative overflow-hidden group border-white/10 mt-12 bg-white/[0.02]">
-    
-    <div class="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent pointer-events-none"></div>
-
-    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        <div class="space-y-6">
-             <h2 class="text-3xl font-medium text-white tracking-tight">
-                Data Technician<br><span class="text-muted-foreground">Specializing in Programming.</span>
-             </h2>
-             <p class="text-muted-foreground leading-relaxed">
-                 I specialize in full-stack web development, but I've never stayed in one lane. I've trained custom AI models, written firmware, built mobile apps, engineered complex scraping pipelines, and automated entire workflows. This breadth allows me to architect and build complete, end-to-end systems without the friction or overhead of coordinating multiple teams
-              </p>
-             <div class="flex gap-4 pt-4">
-                <Button href="#work" variant="pill" class="rounded-full">
-                    View Work
-                </Button>
-                <Button href="mailto:hello@jesper.dev" variant="outline" class="rounded-full border-white/20 hover:bg-white/5">
-                    Contact
-                </Button>
-             </div>
+    <!-- Subtitle with line -->
+    <div
+        class="animate-[fadeIn_0.6s_ease_0.7s_forwards]"
+        style="opacity: 0"
+    >
+        <div class="flex items-center gap-4">
+            <p class="font-mono text-sm md:text-base text-muted-foreground tracking-widest uppercase">
+                Full Stack Developer
+            </p>
+            <div
+                class="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent origin-left animate-[lineGrow_0.8s_ease_0.9s_forwards]"
+                style="transform: scaleX(0)"
+            ></div>
         </div>
 
-        
-        <div class="hidden md:flex justify-end items-center h-full opacity-20">
-             <div class="h-32 w-32 rounded-full border border-white/20 relative animate-[spin_10s_linear_infinite]">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
-             </div>
+        <!-- Status indicator -->
+        <div class="flex items-center gap-2.5 mt-3">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="font-mono text-xs text-emerald-500/80 tracking-wide">Available for work</span>
         </div>
     </div>
+</div>
+
+<!-- Bio card -->
+<TactileCard class="p-0 relative overflow-hidden group border-white/[0.08] mt-14 bg-transparent animate-[fadeIn_0.8s_ease_0.5s_forwards]" style="opacity: 0">
+    
+    <!-- CardSpotlight glow effect -->
+    <CardSpotlight color="rgba(160, 196, 255, 0.04)" />
+
+    <!-- Dot grid background -->
+    <div class="absolute inset-0 tactile-grid opacity-40 pointer-events-none"></div>
+
+    <!-- Top gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none"></div>
+
+    <!-- Animated border glow accent -->
+    <div class="absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+        style="background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(160, 196, 255, 0.08) 60deg, transparent 120deg, rgba(202, 240, 248, 0.06) 240deg, transparent 360deg);"
+    ></div>
+
+    <div class="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-0">
+        <!-- Left column: text content -->
+        <div class="md:col-span-3 p-8 md:p-12 space-y-6">
+            <h2 class="text-3xl md:text-4xl font-medium text-white tracking-tight leading-snug">
+                Data Technician<br>
+                <span class="text-muted-foreground">Specializing in Programming.</span>
+            </h2>
+
+            <p class="text-muted-foreground leading-relaxed max-w-lg">
+                I specialize in full-stack web development, but I've never stayed in one lane. I've trained custom AI models, written firmware, built mobile apps, engineered complex scraping pipelines, and automated entire workflows. This breadth allows me to architect and build complete, end-to-end systems without the friction or overhead of coordinating multiple teams
+            </p>
+
+            <div class="flex gap-4 pt-4">
+                <Button href="#work" variant="pill" class="rounded-full group/btn relative overflow-hidden">
+                    <span class="relative z-10">View Work</span>
+                </Button>
+                <Button href="mailto:hello@jesper.dev" variant="outline" class="rounded-full border-white/20 hover:bg-white/5 hover:border-white/30 transition-all duration-300">
+                    Contact
+                </Button>
+            </div>
+        </div>
+
+        <!-- Right column: 3D scene (desktop) / CSS blob (mobile) -->
+        <div class="hidden md:block md:col-span-2 relative min-h-[340px]">
+            <!-- Subtle vertical divider -->
+            <div class="absolute left-0 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-white/[0.06] to-transparent"></div>
+
+            <!-- 3D Threlte scene -->
+            <HeroScene />
+
+            <!-- Bottom ambient glow beneath the 3D object -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-32 h-8 bg-sky-400/[0.06] blur-2xl rounded-full pointer-events-none"></div>
+        </div>
+
+
+    </div>
 </TactileCard>
+
+<!-- Scroll indicator -->
+<div
+    class="flex flex-col items-center gap-2 pt-8 transition-opacity duration-500"
+    class:opacity-0={!scrollIndicatorVisible}
+    class:pointer-events-none={!scrollIndicatorVisible}
+>
+    <span class="font-mono text-[10px] text-muted-foreground/50 tracking-[0.2em] uppercase">Scroll</span>
+    <div class="relative w-px h-8 bg-white/[0.06] overflow-hidden">
+        <div
+            class="absolute w-px h-2 bg-white/30 animate-[scrollLine_2s_ease-in-out_infinite]"
+        ></div>
+    </div>
+</div>

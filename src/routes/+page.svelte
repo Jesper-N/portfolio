@@ -56,7 +56,7 @@
 
 <main
     id="top"
-    class="relative z-10 min-h-screen max-w-6xl mx-auto px-6 pt-16 pb-32 space-y-32"
+    class="relative z-10 min-h-screen max-w-6xl mx-auto px-6 pt-16 pb-32 space-y-24"
 >
 
     <section>

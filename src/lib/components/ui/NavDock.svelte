@@ -38,7 +38,6 @@
             icon: BriefcaseBusiness,
         },
         { id: "hobbies", label: "Hobbies", href: "#hobbies", icon: Gamepad2 },
-        { id: "contact", label: "Contact", href: "#contact", icon: Mail },
     ];
 
     const socialLinks: DockLink[] = [
@@ -54,6 +53,13 @@
             label: "LinkedIn",
             href: "https://linkedin.com/in/your-handle",
             icon: Linkedin,
+            external: true,
+        },
+        {
+            id: "contact",
+            label: "Contact",
+            href: "mailto:hello@jesper.dev",
+            icon: Mail,
             external: true,
         },
     ];
